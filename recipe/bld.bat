@@ -15,6 +15,9 @@ if "%CONDA_PY%" == "34" (
 if "%CONDA_PY%" == "35" (
     set MSVC_VER=1900
 )
+if "%CONDA_PY%" == "36" (
+    set MSVC_VER=1900
+)
 
 if "%MSVC_VER%"=="" (
     echo "Python version not supported. Please update bld.bat"
@@ -68,6 +71,11 @@ set BLD_OPTS=%WIN64% ^
     EXPAT_DIR=%LIBRARY_PREFIX% ^
     EXPAT_INCLUDE="-I%LIBRARY_INC%" ^
     EXPAT_LIB=%LIBRARY_LIB%\expat.lib
+rem      SQLITE_INC="-I%LIBRARY_INC% -DHAVE_SPATIALITE" ^
+rem      SQLITE_LIB="%LIBRARY_LIB%\sqlite3.lib %LIBRARY_LIB%\spatialite_i.lib" ^
+rem      SPATIALITE_412_OR_LATER=yes ^
+rem      PG_INC_DIR=%LIBRARY_INC% ^
+rem      PG_LIB=%LIBRARY_LIB%\libpq.lib
 
 nmake /f makefile.vc %BLD_OPTS%
 if errorlevel 1 exit 1
@@ -81,9 +89,11 @@ copy *.lib %LIBRARY_LIB%\ || exit 1
 if errorlevel 1 exit 1
 
 :: Python bindings
-cd swig\python
-%PYTHON% setup.py build
+cd swig
+nmake /f makefile.vc python %BLD_OPTS%
 if errorlevel 1 exit 1
+
+cd python
 
 %PYTHON% setup.py install
 if errorlevel 1 exit 1
