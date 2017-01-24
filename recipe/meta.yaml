@@ -18,7 +18,7 @@ source:
     - MSC_VER_1900_snprintf.patch  # [win]
 
 build:
-  number: 3
+  number: 4
   features:
     - vc9  # [win and py27]
     - vc10  # [win and py34]
@@ -42,7 +42,7 @@ requirements:
     - libnetcdf 4.4.*
     - libdap4 3.18.*  # [not win]
     - libtiff 4.0.*
-    - libpng >=1.6.23,<1.7
+    - libpng >=1.6.28,<1.7
     - zlib 1.2.*  # [not win]
     - jpeg 9*
     - postgresql  # [not win]
@@ -68,7 +68,7 @@ requirements:
     - libnetcdf 4.4.*
     - libdap4 3.18.*  # [not win]
     - libtiff 4.0.*
-    - libpng >=1.6.23,<1.7
+    - libpng >=1.6.28,<1.7
     - zlib 1.2.*  # [not win]
     - jpeg 9*
     - libpq
@@ -106,7 +106,6 @@ test:
     - osgeo._ogr
     - osgeo._osr
   commands:
-    - ogrinfo sites.shp
     - gdal_grid --version
     - gdal_rasterize --version
     - gdal_translate --version
@@ -121,6 +120,7 @@ test:
 about:
   home: http://www.gdal.org/
   license: MIT
+  license_file: LICENSE.TXT
   summary: 'The Geospatial Data Abstraction Library (GDAL).'
 
 extra:
