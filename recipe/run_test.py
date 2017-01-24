@@ -51,9 +51,9 @@ driver = ogr.GetDriverByName('KML')
 assert driver is not None
 
 # Only available when SQLite successfully linked in.
-#if sys.platform != 'win32':
-driver = ogr.GetDriverByName('SQLite')
-assert driver is not None
+if sys.platform != 'win32':
+    driver = ogr.GetDriverByName('SQLite')
+    assert driver is not None
 
 ## Only available when PostgreSQL successfully linked in.
 #driver = ogr.GetDriverByName('PostgreSQL')
