@@ -5,16 +5,9 @@ from osgeo import gdal
 from osgeo import ogr
 from osgeo import osr
 
-# Set GDAL_DATA. This is done normally done by the activate script,
-# but this doesn't happen in the testing environment.
-if 'LIBRARY_PREFIX' in os.environ:
-    # Windows.
-    gdalData = os.path.join(os.environ['LIBRARY_PREFIX'], 'share', 'gdal')
-else:
-    # Linux/OS X.
-    gdalData = os.path.join(os.environ['PREFIX'], 'share', 'gdal')
-
-os.environ['GDAL_DATA'] = gdalData
+# Avoid the regressing from https://github.com/conda-forge/gdal-feedstock/pull/129
+# See https://github.com/conda-forge/gdal-feedstock/issues/131
+from osgeo.gdal_array import *
 
 driver = gdal.GetDriverByName('netCDF')
 assert driver is not None
@@ -33,6 +26,9 @@ assert driver is not None
 
 driver = gdal.GetDriverByName('JPEG')
 assert driver is not None
+
+#driver = gdal.GetDriverByName('GPKG')
+#assert driver is not None
 
 # Only available when xerces-c++ successfully linked in.
 driver = ogr.GetDriverByName('GML')
@@ -58,6 +54,10 @@ assert driver is not None
 if sys.platform != 'win32':
     driver = ogr.GetDriverByName('SQLite')
     assert driver is not None
+
+## Only available when PostgreSQL successfully linked in.
+#driver = ogr.GetDriverByName('PostgreSQL')
+#assert driver is not None
 
 def has_geos():
     pnt1 = ogr.CreateGeometryFromWkt( 'POINT(10 20)' )
@@ -88,6 +88,20 @@ def has_proj():
     return hasproj
 
 assert has_proj(), 'PROJ not available within GDAL'
+
+# Test https://github.com/swig/swig/issues/567
+def make_geom():
+    geom = ogr.Geometry(ogr.wkbPoint)
+    geom.AddPoint_2D(0, 0)
+    return geom
+
+def gen_list(N):
+    for i in range(N):
+        geom = make_geom()
+        yield i
+
+N = 10
+assert list(gen_list(N)) == list(range(N))
 
 # This module does some additional tests.
 import extra_tests
