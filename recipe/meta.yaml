@@ -18,7 +18,7 @@ source:
     - MSC_VER_1900_snprintf.patch  # [win]
 
 build:
-  number: 4
+  number: 5
   features:
     - vc9  # [win and py27]
     - vc10  # [win and py34]
