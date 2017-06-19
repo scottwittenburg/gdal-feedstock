@@ -12,20 +12,14 @@ source:
   patches:
     - clang.patch  # [osx]
     - prepend-dll.patch  # [win]
-    # Fixes compilation problems with JPEG.
-    # https://lists.osgeo.org/pipermail/gdal-dev/2016-January/043443.html
-    - disable_jpeg12.patch  # [win]
-    - windowshdf5.patch  # [win]
-    - multiprocessor.patch  # [win]
     - install_scripts.patch
 
 build:
-  number: 2
-  skip: True  # [py36 and linux]
+  number: 3
   features:
     - vc9  # [win and py27]
     - vc10  # [win and py34]
-    - vc14  # [win and py>=35]
+    - vc14  # [win and (py35 and py36)]
 
 requirements:
   build:
@@ -33,58 +27,17 @@ requirements:
     - setuptools
     - cmake  # [win]
     - numpy x.x
-    - hdf4
-    - geos 3.5.1
-    - hdf5 1.8.18|1.8.18.*
-    - proj4 4.9.3
-    - xerces-c
-    - libnetcdf 4.4.*
-    - libdap4 3.18.*  # [not win]
-    - kealib
-    - libtiff 4.0.*
-    - libpng >=1.6.28,<1.7
-    - zlib 1.2.*  # [not win]
-    - jpeg 9*
-    - postgresql
-    - giflib 5.1.*  # [not win]
-    - json-c  # [not win]
-    - freexl
-    - openjpeg
-    - curl
-    - expat
-    - sqlite 3.13.*
-    - libspatialite
-    - vc   9  # [win and py27]
-    - vc  10  # [win and py34]
-    - vc  14  # [win and py>=35]
-
+    - libgdal {{ version }}
+    - vc 9  # [win and py27]
+    - vc 10  # [win and py34]
+    - vc 14  # [win and (py35 and py36)]
   run:
     - python
     - numpy x.x
-    - hdf4
-    - geos 3.5.1
-    - hdf5 1.8.18|1.8.18.*
-    - proj4 4.9.3
-    - xerces-c
-    - libnetcdf 4.4.*
-    - libdap4 3.18.*  # [not win]
-    - kealib
-    - libtiff 4.0.*
-    - libpng >=1.6.28,<1.7
-    - zlib 1.2.*  # [not win]
-    - jpeg 9*
-    - libpq
-    - giflib 5.1.*  # [not win]
-    - json-c  # [not win]
-    - freexl
-    - openjpeg
-    - curl
-    - expat
-    - sqlite 3.13.*
-    - libspatialite
-    - vc   9  # [win and py27]
-    - vc  10  # [win and py34]
-    - vc  14  # [win and py>=35]
+    - libgdal {{ version }}
+    - vc 9  # [win and py27]
+    - vc 10  # [win and py34]
+    - vc 14  # [win and (py35 and py36)]
 
 test:
   files:
@@ -121,7 +74,7 @@ about:
   home: http://www.gdal.org/
   license: MIT
   license_file: LICENSE.TXT
-  summary: 'The Geospatial Data Abstraction Library (GDAL).'
+  summary: 'Python wrapper for the Geospatial Data Abstraction Library (GDAL)'
 
 extra:
   recipe-maintainers:
