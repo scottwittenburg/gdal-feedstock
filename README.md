@@ -7,7 +7,7 @@ Package license: MIT
 
 Feedstock license: BSD 3-Clause
 
-Summary: The Geospatial Data Abstraction Library (GDAL).
+Summary: Python wrapper for the Geospatial Data Abstraction Library (GDAL)
 
 
 
