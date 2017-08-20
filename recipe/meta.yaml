@@ -5,7 +5,6 @@ package:
   version: {{ version }}
 
 source:
-  fn: gdal-{{ version }}.tar.gz
   url: http://download.osgeo.org/gdal/{{ version }}/gdal-{{ version }}.tar.gz
   sha256: ae6a0a0dc6eb45a981a46db27e3dfe16c644fcf04732557e2cb315776974074a
   patches:
@@ -19,7 +18,7 @@ source:
     - install_scripts.patch
 
 build:
-  number: 4
+  number: 5
   features:
     - vc9  # [win and py27]
     - vc10  # [win and py34]
@@ -34,9 +33,9 @@ requirements:
     - sed  # [osx]
     - setuptools
     - cmake  # [win]
-    - numpy 1.7.*  # [py27]
-    - numpy 1.9.*  # [py35]
-    - numpy 1.11.*  # [py36]
+    - numpy 1.8.*  # [not (win and (py35 or py36))]
+    - numpy 1.9.*  # [win and py35]
+    - numpy 1.11.*  # [win and py36]
     - hdf4
     - hdf5 1.8.18|1.8.18.*
     - geos 3.5.1
@@ -63,9 +62,9 @@ requirements:
     - vc 14  # [win and (py35 or py36)]
   run:
     - python
-    - numpy >=1.7  # [py27]
-    - numpy >=1.9  # [py35]
-    - numpy >=1.11  # [py36]
+    - numpy >=1.8  # [not (win and (py35 or py36))]
+    - numpy >=1.9  # [win and py35]
+    - numpy >=1.11  # [win and py36]
     - hdf4
     - hdf5 1.8.18|1.8.18.*
     - geos 3.5.1
