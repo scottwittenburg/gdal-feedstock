@@ -86,7 +86,7 @@ cd ../..
 
 # CircleCI offers two cores.
 make -j $CPU_COUNT >> $BUILD_OUTPUT 2>&1
-make install >> $BUILD_OUTPUT 2>&1
+make install -j $CPU_COUNT >> $BUILD_OUTPUT 2>&1
 
 # Make sure GDAL_DATA and set and still present in the package.
 # https://github.com/conda/conda-recipes/pull/267

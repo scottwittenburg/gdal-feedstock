@@ -52,7 +52,7 @@ requirements:
     - giflib 5.1.*  # [not win]
     - json-c  # [not win]
     - freexl
-    - openjpeg
+    - openjpeg 2.1.*
     - curl
     - expat
     - sqlite 3.13.*
@@ -81,7 +81,7 @@ requirements:
     - giflib 5.1.*  # [not win]
     - json-c  # [not win]
     - freexl
-    - openjpeg
+    - openjpeg >=2.1,<2.3.0
     - curl
     - expat
     - sqlite 3.13.*
