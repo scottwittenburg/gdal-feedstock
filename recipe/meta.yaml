@@ -18,10 +18,9 @@ source:
     - install_scripts.patch
 
 build:
-  number: 5
+  number: 6
   features:
     - vc9  # [win and py27]
-    - vc10  # [win and py34]
     - vc14  # [win and (py35 or py36)]
 
 requirements:
@@ -33,62 +32,60 @@ requirements:
     - sed  # [osx]
     - setuptools
     - cmake  # [win]
+    - curl >=7.54.1,<8
+    - expat 2.1.*
+    - freexl
+    - geos 3.6.2
+    - giflib 5.1.*  # [not win]
+    - hdf4
+    - hdf5 1.10.1
+    - jpeg 9*
+    - json-c  # [not win]
+    - kealib
+    - libdap4 3.18.*  # [not win]
+    - libnetcdf 4.4.*
+    - libpng >=1.6.22,<1.6.31
+    - libspatialite
+    - libtiff 4.0.*
+    - numpy 1.11.*  # [win and py36]
     - numpy 1.8.*  # [not (win and (py35 or py36))]
     - numpy 1.9.*  # [win and py35]
-    - numpy 1.11.*  # [win and py36]
-    - hdf4
-    - hdf5 1.8.18|1.8.18.*
-    - geos 3.5.1
-    - proj4 4.9.3
-    - xerces-c
-    - libnetcdf 4.4.*
-    - libdap4 3.18.*  # [not win]
-    - kealib
-    - libtiff 4.0.*
-    - libpng >=1.6.28,<1.7
-    - zlib 1.2.8  # [not win]
-    - jpeg 9*
+    - openjpeg 2.1.0
     - postgresql
-    - giflib 5.1.*  # [not win]
-    - json-c  # [not win]
-    - freexl
-    - openjpeg 2.1.*
-    - curl
-    - expat
+    - proj4 4.9.3
     - sqlite 3.13.*
-    - libspatialite
+    - xerces-c
+    - zlib 1.2.11  # [not win]
     - vc 9  # [win and py27]
-    - vc 10  # [win and py34]
     - vc 14  # [win and (py35 or py36)]
   run:
     - python
+    - curl >=7.54.1,<8
+    - expat 2.1.*
+    - freexl
+    - geos 3.6.2
+    - giflib 5.1.*  # [not win]
+    - hdf4
+    - hdf5 1.10.1
+    - jpeg 9*
+    - json-c  # [not win]
+    - kealib
+    - libdap4 3.18.*  # [not win]
+    - libnetcdf 4.4.*
+    - libpng >=1.6.22,<1.6.31
+    - libpq
+    - libspatialite
+    - libtiff 4.0.*
+    - numpy >=1.11  # [win and py36]
     - numpy >=1.8  # [not (win and (py35 or py36))]
     - numpy >=1.9  # [win and py35]
-    - numpy >=1.11  # [win and py36]
-    - hdf4
-    - hdf5 1.8.18|1.8.18.*
-    - geos 3.5.1
-    - proj4 4.9.3
-    - xerces-c
-    - libnetcdf 4.4.*
-    - libdap4 3.18.*  # [not win]
-    - kealib
-    - libtiff 4.0.*
-    - libpng >=1.6.28,<1.7
-    - zlib 1.2.8  # [not win]
-    - jpeg 9*
-    - libpq
-    - giflib 5.1.*  # [not win]
-    - json-c  # [not win]
-    - freexl
     - openjpeg >=2.1,<2.3.0
-    - curl
-    - expat
+    - proj4 4.9.3
     - sqlite 3.13.*
-    - libspatialite
+    - xerces-c
+    - zlib 1.2.11  # [not win]
     - pcre
     - vc 9  # [win and py27]
-    - vc 10  # [win and py34]
     - vc 14  # [win and (py35 or py36)]
 
 test:
@@ -115,8 +112,8 @@ test:
     - gdalwarp --version
     - gdalinfo --formats
     - gdalinfo http://thredds.nersc.no/thredds/dodsC/greenpath/Model/topaz  # [not win]
-    - conda inspect linkages -p $PREFIX gdal  # [not win]
-    - conda inspect objects -p $PREFIX gdal  # [osx]
+    - conda inspect linkages -p $PREFIX $PKG_NAME  # [not win]
+    - conda inspect objects -p $PREFIX $PKG_NAME  # [osx]
 
 about:
   home: http://www.gdal.org/
