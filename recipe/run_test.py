@@ -6,8 +6,8 @@ from osgeo import osr
 # See https://github.com/conda-forge/gdal-feedstock/issues/131
 from osgeo.gdal_array import *
 
-driver = gdal.GetDriverByName("netCDF")
-assert driver is not None
+# driver = gdal.GetDriverByName("netCDF")
+# assert driver is not None
 
 driver = gdal.GetDriverByName("HDF4")
 assert driver is not None
@@ -44,20 +44,20 @@ driver = gdal.GetDriverByName("WCS")
 assert driver is not None
 
 # only available when freexl successfully linked in.
-driver = ogr.GetDriverByName("XLS")
-assert driver is not None
+# driver = ogr.GetDriverByName("XLS")
+# assert driver is not None
 
 # only available when expat successfully linked in.
-driver = ogr.GetDriverByName("KML")
-assert driver is not None
+# driver = ogr.GetDriverByName("KML")
+# assert driver is not None
 
 # only available when SQLite successfully linked in.
-driver = ogr.GetDriverByName("SQLite")
-assert driver is not None
+# driver = ogr.GetDriverByName("SQLite")
+# assert driver is not None
 
-# only available when PostgreSQL successfully linked in.
-driver = ogr.GetDriverByName("PostgreSQL")
-assert driver is not None
+# # only available when PostgreSQL successfully linked in.
+# driver = ogr.GetDriverByName("PostgreSQL")
+# assert driver is not None
 
 def has_geos():
     pnt1 = ogr.CreateGeometryFromWkt( 'POINT(10 20)' )
