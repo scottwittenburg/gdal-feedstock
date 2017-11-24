@@ -1,4 +1,4 @@
-{% set version = "2.2.2" %}
+{% set version = "2.2.3" %}
 
 package:
   name: gdal
@@ -6,14 +6,14 @@ package:
 
 source:
   url: http://download.osgeo.org/gdal/{{ version }}/gdal-{{ version }}.tar.gz
-  sha256: 14c1f78a60f429ad51c08d75cbf49771f1e6b20e7385c6e8379b40e8dfa39544
+  sha256: 52f01bda8968643633016769607e6082a8ba1c746fadc2c1abe12cf7dc8f61dd
   patches:
     - clang.patch  # [osx]
     - prepend-dll.patch  # [win]
     - install_scripts.patch
 
 build:
-  number: 1
+  number: 0
   features:
     - vc9  # [win and py27]
     - vc14  # [win and (py35 and py36)]
