@@ -1,3 +1,5 @@
+import sys
+
 from osgeo import gdal
 from osgeo import ogr
 from osgeo import osr
@@ -6,65 +8,25 @@ from osgeo import osr
 # See https://github.com/conda-forge/gdal-feedstock/issues/131
 from osgeo.gdal_array import *
 
-driver = gdal.GetDriverByName("netCDF")
-assert driver is not None
+drivers = ['netCDF', 'HDF4', 'HDF5', 'GTiff', 'PNG', 'JPEG', 'GPKG', 'KEA', 'JP2OpenJPEG', 'WCS']
+for driver in drivers:
+    print(driver)
+    assert gdal.GetDriverByName(driver)
 
-driver = gdal.GetDriverByName("HDF4")
-assert driver is not None
-
-driver = gdal.GetDriverByName("HDF5")
-assert driver is not None
-
-driver = gdal.GetDriverByName("GTiff")
-assert driver is not None
-
-driver = gdal.GetDriverByName("PNG")
-assert driver is not None
-
-driver = gdal.GetDriverByName("JPEG")
-assert driver is not None
-
-driver = gdal.GetDriverByName("GPKG")
-assert driver is not None
-
-# only available when libkea successfully linked in.
-driver = gdal.GetDriverByName("KEA")
-assert driver is not None
-
-# only available when xerces-c++ successfully linked in.
-driver = ogr.GetDriverByName("GML")
-assert driver is not None
-
-# only available when openjpeg successfully linked in.
-driver = gdal.GetDriverByName("JP2OpenJPEG")
-assert driver is not None
-
-# only available when curl successfully linked in.
-driver = gdal.GetDriverByName("WCS")
-assert driver is not None
-
-# only available when freexl successfully linked in.
-driver = ogr.GetDriverByName("XLS")
-assert driver is not None
-
-# only available when expat successfully linked in.
-driver = ogr.GetDriverByName("KML")
-assert driver is not None
-
-# only available when SQLite successfully linked in.
-driver = ogr.GetDriverByName("SQLite")
-assert driver is not None
-
-# only available when PostgreSQL successfully linked in.
-driver = ogr.GetDriverByName("PostgreSQL")
-assert driver is not None
+drivers = ['GML', 'XLS', 'KML', 'SQLite', 'PostgreSQL']
+for driver in drivers:
+    print(driver)
+    if sys.platform == 'darwin':
+        print('Skipping driver test {} on OSX!'.format(driver))
+    else:
+        assert ogr.GetDriverByName(driver)
 
 def has_geos():
     pnt1 = ogr.CreateGeometryFromWkt( 'POINT(10 20)' )
     pnt2 = ogr.CreateGeometryFromWkt( 'POINT(30 20)' )
     ogrex = ogr.GetUseExceptions()
     ogr.DontUseExceptions()
-    hasgeos = pnt1.Union( pnt2 ) is not None
+    hasgeos = pnt1.Union(pnt2) is not None
     if ogrex:
         ogr.UseExceptions()
     return hasgeos
