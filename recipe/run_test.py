@@ -8,12 +8,14 @@ from osgeo import osr
 # See https://github.com/conda-forge/gdal-feedstock/issues/131
 from osgeo.gdal_array import *
 
-drivers = ['netCDF', 'HDF4', 'HDF5', 'GTiff', 'PNG', 'JPEG', 'GPKG', 'KEA', 'JP2OpenJPEG', 'WCS']
+# drivers = ['netCDF', 'HDF4', 'HDF5', 'GTiff', 'PNG', 'JPEG', 'GPKG', 'KEA', 'JP2OpenJPEG', 'WCS']
+drivers = ['HDF4', 'HDF5', 'GTiff', 'PNG', 'GPKG', 'KEA', 'JP2OpenJPEG', 'WCS']
 for driver in drivers:
     print(driver)
     assert gdal.GetDriverByName(driver)
 
-drivers = ['GML', 'XLS', 'KML', 'SQLite', 'PostgreSQL']
+# drivers = ['GML', 'XLS', 'KML', 'SQLite', 'PostgreSQL']
+drivers = ['GML']
 for driver in drivers:
     print(driver)
     if sys.platform == 'darwin':
